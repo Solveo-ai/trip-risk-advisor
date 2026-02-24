@@ -5,7 +5,8 @@ import TripCostSummary from '@/components/calculator/TripCostSummary';
 import RiskContext from '@/components/calculator/RiskContext';
 import InsuranceComparison from '@/components/calculator/InsuranceComparison';
 import { type Destination, type AccommodationTier } from '@/data/travelData';
-import { Shield, ChevronDown, Database, ExternalLink } from 'lucide-react';
+import { ChevronDown, Database, ExternalLink } from 'lucide-react';
+import policymarketLogo from '@/assets/policymarket-logo.svg';
 
 const Index = () => {
   const [destination, setDestination] = useState<Destination | null>(null);
@@ -27,21 +28,28 @@ const Index = () => {
   return (
     <div className="min-h-screen" style={{ background: 'var(--gradient-subtle)' }}>
       {/* Header */}
-      <header className="gradient-hero text-primary-foreground py-8 px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <Shield className="h-6 w-6" />
-            <span className="text-sm font-medium opacity-80">PolicyMarket</span>
+      <header className="bg-card border-b border-border py-4 px-4">
+        <div className="max-w-3xl mx-auto flex items-center justify-between">
+          <img src={policymarketLogo} alt="PolicyMarket" className="h-7" />
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <a href="#" className="hover:text-foreground transition-colors">Kontaktirajte nas</a>
+            <a href="#" className="hover:text-foreground transition-colors">Blog</a>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold font-heading mb-2">
-            Koliko zaista košta vaše putovanje?
-          </h1>
-          <p className="text-sm opacity-80 max-w-lg mx-auto">
-            Izračunajte ukupnu investiciju i saznajte koliko košta da je zaštitite — transparentno, bez skrivenih troškova.
-          </p>
-          <ChevronDown className="h-5 w-5 mx-auto mt-4 animate-pulse-soft opacity-60" />
         </div>
       </header>
+
+      {/* Hero */}
+      <section className="py-10 px-4 text-center">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl font-bold font-heading text-foreground mb-3">
+            Koliko košta tvoje putovanje?
+          </h1>
+          <p className="text-base text-muted-foreground max-w-lg mx-auto mb-2">
+            Izaberi destinaciju i saznaj okvirne troškove za prevoz, smeštaj i osiguranje.
+          </p>
+          <ChevronDown className="h-5 w-5 mx-auto mt-4 animate-pulse-soft text-muted-foreground opacity-60" />
+        </div>
+      </section>
 
       {/* Calculator */}
       <main className="max-w-3xl mx-auto px-4 py-8 space-y-6">
