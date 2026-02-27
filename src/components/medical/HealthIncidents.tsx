@@ -9,7 +9,7 @@ export default function HealthIncidents({ destination }: Props) {
     <div className="rounded-xl border border-warning/30 bg-warning/5 p-5 space-y-3">
       <h2 className="text-base font-semibold font-heading text-foreground flex items-center gap-2">
         <span className="text-lg">⚠️</span>
-        Top 5 zdravstvenih rizika za turiste u: {destination.name}
+        Ovo su najčešći razlozi zašto turisti završe kod lekara u: {destination.name}
       </h2>
 
       <ul className="space-y-2.5">
