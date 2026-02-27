@@ -37,7 +37,7 @@ export default function InsurancePricing({ destination }: Props) {
           </h2>
         </div>
         <p className="text-sm text-muted-foreground">
-          👤 1 osoba · 📅 7 dana · 🛡️ Standardni paket — Istraživanje tržišta, feb. 2026.
+          A koliko košta da se ovo ne desi tebi? 👤 1 osoba · 📅 7 dana · 🛡️ Standardni paket
         </p>
       </div>
 

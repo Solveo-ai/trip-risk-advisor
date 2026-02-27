@@ -34,10 +34,10 @@ const Index = () => {
       <section className="py-10 px-4 text-center">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-3xl sm:text-4xl font-bold font-heading text-foreground mb-3">
-            🏥 Koliko košta lečenje u inostranstvu?
+            Ne daj Bože da ti se nešto desi na putu. Bez osiguranja.
           </h1>
           <p className="text-base text-muted-foreground max-w-xl mx-auto">
-            Stvarne cene lečenja u 20 najpopularnijih destinacija iz Srbije — bez putnog osiguranja.
+            Pogledaj stvarne cene lečenja u 20 najpopularnijih destinacija iz Srbije — i koliko bi te to koštalo iz svog džepa.
           </p>
         </div>
       </section>
@@ -45,7 +45,7 @@ const Index = () => {
       {/* Destination picker */}
       <main className="max-w-3xl mx-auto px-4 pb-12 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-          <label className="text-sm font-medium text-foreground whitespace-nowrap">Izaberite destinaciju:</label>
+          <label className="text-sm font-medium text-foreground whitespace-nowrap">Gde putuješ?</label>
           <DestinationSelect selected={destination} onSelect={setDestination} />
         </div>
 
@@ -73,10 +73,10 @@ const Index = () => {
         <div className="rounded-xl gradient-hero p-6 text-center space-y-3">
           <ShieldCheck className="h-8 w-8 mx-auto text-primary-foreground" />
           <h2 className="text-xl font-bold font-heading text-primary-foreground">
-            Zaštitite se za manje od €2 dnevno
+            Ne daj Bože. Ali ako se desi — neka te košta manje od €2 dnevno, ne €800.
           </h2>
           <p className="text-sm text-primary-foreground/80 max-w-md mx-auto">
-            Putno osiguranje pokriva sve ove troškove — uporedite cene osiguravajućih kuća u Srbiji.
+            Putno osiguranje pokriva sve ove troškove. Uporedi cene osiguravajućih kuća u Srbiji.
           </p>
           <a
             href="https://mktg-stg.policymarket.shop/sr"
@@ -84,8 +84,7 @@ const Index = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-card text-foreground font-semibold py-3 px-8 rounded-lg hover:bg-card/90 transition-colors text-sm shadow-accent"
           >
-            Uporedi polise osiguranja
-            <ExternalLink className="h-4 w-4" />
+            Uporedi polise osiguranja →
           </a>
         </div>
 
