@@ -90,14 +90,14 @@ const Index = () => {
 
         {/* Footer */}
         <footer className="pt-6 pb-10 border-t border-border space-y-3">
-          <div className="text-xs text-muted-foreground space-y-1.5">
-            <p className="font-medium">Podaci prikupljeni iz:</p>
-            <p>gov.uk, CDC, doctorsa.com, expatistan.com, internationalinsurance.com, Admiral, AllClear Travel, PillInTrip</p>
-          </div>
+          <p className="text-xs text-muted-foreground">
+            <span className="font-medium">Podaci su prikupljeni sa: </span>
+            gov.uk, CDC, doctorsa.com, expatistan.com, internationalinsurance.com, Admiral, AllClear Travel, PillInTrip
+          </p>
           <p className="text-xs text-muted-foreground">
             Cene su okvirne i odnose se na pacijente bez osiguranja. Stvarni troškovi mogu varirati u zavisnosti od bolnice i vrste tretmana.
           </p>
-          <div className="flex items-center gap-4 text-xs text-muted-foreground pt-2">
+          <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground pt-2">
             <span>© 2026 PolicyMarket</span>
             <a href="https://policymarket.co" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-foreground transition-colors">
               policymarket.co <ExternalLink className="h-3 w-3" />
