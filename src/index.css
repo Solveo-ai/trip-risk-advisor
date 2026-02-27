@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -65,7 +65,7 @@
     --shadow-elevated: 0 10px 25px -5px hsl(220 20% 20% / 0.08), 0 8px 10px -6px hsl(220 20% 20% / 0.04);
     --shadow-accent: 0 4px 14px 0 hsl(160 45% 45% / 0.25);
 
-    --font-heading: 'Space Grotesk', sans-serif;
+    --font-heading: 'Inter', sans-serif;
     --font-body: 'DM Sans', sans-serif;
   }
 
@@ -112,6 +112,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+    font-weight: 800;
   }
 }
 
