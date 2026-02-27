@@ -7,6 +7,7 @@ import DestinationRank from '@/components/medical/DestinationRank';
 import InsurancePricing from '@/components/medical/InsurancePricing';
 import { ExternalLink, ShieldCheck } from 'lucide-react';
 import policymarketLogo from '@/assets/policymarket-logo.svg';
+import miskoImg from '@/assets/misko.png';
 
 const defaultDest = medicalDestinations.find(d => d.id === 'greece')!;
 
@@ -70,10 +71,13 @@ const Index = () => {
         </div>
 
         {/* CTA */}
-        <div className="rounded-xl gradient-hero p-6 text-center space-y-3">
-          <ShieldCheck className="h-8 w-8 mx-auto text-primary-foreground" />
+        <div className="rounded-xl gradient-hero p-6 text-center space-y-4">
+          <div className="flex flex-col items-center gap-2">
+            <img src={miskoImg} alt="Miško" className="h-24 w-24 rounded-full object-cover border-2 border-primary-foreground/30 shadow-lg" />
+            <p className="text-sm font-medium text-primary-foreground/90 italic">Koji je Miškov savet za tebe?</p>
+          </div>
           <h2 className="text-xl font-bold font-heading text-primary-foreground">
-            Ne daj Bože. Ali ako se desi — neka te košta manje od €2 dnevno, ne €800.
+            Ne daj Bože, ali ako se nešto desi, neka te to košta manje od €2 dnevno, a ne €800.
           </h2>
           <p className="text-sm text-primary-foreground/80 max-w-md mx-auto">
             Putno osiguranje pokriva sve ove troškove. Uporedi cene osiguravajućih kuća u Srbiji.
