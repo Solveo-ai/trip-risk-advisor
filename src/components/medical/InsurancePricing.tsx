@@ -122,18 +122,8 @@ export default function InsurancePricing({ destination }: Props) {
         })}
       </div>
 
-      {/* CTA */}
       <div className="px-5 pb-5">
-        <a
-          href="https://mktg-stg.policymarket.shop/sr"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-full inline-flex items-center justify-center gap-2 gradient-hero text-primary-foreground font-semibold py-3.5 px-6 rounded-lg shadow-accent hover:opacity-90 transition-opacity text-sm"
-        >
-          Uporedi i kupi polisu online
-          <ExternalLink className="h-4 w-4" />
-        </a>
-        <p className="text-xs text-muted-foreground text-center mt-2">
+        <p className="text-xs text-muted-foreground text-center">
           Cene su informativne. Tačnu cenu dobijate na stranici za poređenje.
         </p>
       </div>
