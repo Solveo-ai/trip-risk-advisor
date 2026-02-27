@@ -1,4 +1,4 @@
-import { type MedicalDestination, costLabels, formatCostRange, getWorstCaseTotal } from '@/data/medicalData';
+import { type MedicalDestination, costLabels, formatCostRange, getWorstCaseTotal, getAverageCost } from '@/data/medicalData';
 
 interface Props {
   destination: MedicalDestination;
@@ -18,6 +18,7 @@ export default function CostTable({ destination }: Props) {
   }
 
   const worstCase = getWorstCaseTotal(destination.costs);
+  const avgCase = getAverageCost(destination.costs);
 
   return (
     <div className="rounded-xl border border-border bg-card card-elevated overflow-hidden">
@@ -76,6 +77,14 @@ export default function CostTable({ destination }: Props) {
               </td>
               <td className="px-5 py-3.5 text-right font-bold text-destructive text-base tabular-nums">
                 €{worstCase.toLocaleString('sr-RS')}
+              </td>
+            </tr>
+            <tr className="border-t border-border bg-foreground/3">
+              <td className="px-5 py-3 text-muted-foreground">
+                Prosečan trošak (srednja vrednost)
+              </td>
+              <td className="px-5 py-3 text-right font-semibold text-foreground tabular-nums">
+                €{avgCase.toLocaleString('sr-RS')}
               </td>
             </tr>
           </tfoot>

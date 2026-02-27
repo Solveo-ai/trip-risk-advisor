@@ -4,6 +4,7 @@ import DestinationSelect from '@/components/medical/DestinationSelect';
 import CostTable from '@/components/medical/CostTable';
 import HealthIncidents from '@/components/medical/HealthIncidents';
 import DestinationRank from '@/components/medical/DestinationRank';
+import InsurancePricing from '@/components/medical/InsurancePricing';
 import { ExternalLink, ShieldCheck } from 'lucide-react';
 import policymarketLogo from '@/assets/policymarket-logo.svg';
 
@@ -61,6 +62,11 @@ const Index = () => {
         {/* Section 3: Destination Rank */}
         <div className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
           <DestinationRank destination={destination} />
+        </div>
+
+        {/* Section 4: Insurance Pricing */}
+        <div className="animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
+          <InsurancePricing destination={destination} />
         </div>
 
         {/* CTA */}
