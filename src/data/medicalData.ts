@@ -445,6 +445,67 @@ export function getWorstCaseTotal(costs: MedicalDestination['costs']): number {
   return Object.values(costs).reduce((sum, r) => sum + r.max, 0);
 }
 
+export function getAverageCost(costs: MedicalDestination['costs']): number {
+  const values = Object.values(costs);
+  const total = values.reduce((sum, r) => sum + Math.round((r.min + r.max) / 2), 0);
+  return total;
+}
+
+export interface InsuranceCompany {
+  id: string;
+  name: string;
+  packages: string;
+  coverage: string;
+  tag: 'cheapest' | 'balanced' | 'premium';
+  prices: {
+    balkans: { perPerson7d: number };
+    europe: { perPerson7d: number };
+    world: { perPerson7d: number };
+  };
+}
+
+export const insuranceCompanies: InsuranceCompany[] = [
+  {
+    id: 'grawe', name: 'Grawe', packages: 'Travel / Travel Star',
+    coverage: '15K–120K€ medical', tag: 'cheapest',
+    prices: { balkans: { perPerson7d: 8 }, europe: { perPerson7d: 13 }, world: { perPerson7d: 20 } },
+  },
+  {
+    id: 'sava', name: 'Sava', packages: 'Basic / Standard / Premium',
+    coverage: '15K–60K€ medical', tag: 'balanced',
+    prices: { balkans: { perPerson7d: 11 }, europe: { perPerson7d: 15 }, world: { perPerson7d: 22 } },
+  },
+  {
+    id: 'wiener', name: 'Wiener', packages: 'Standard / VIP',
+    coverage: '12K–40K€ medical', tag: 'balanced',
+    prices: { balkans: { perPerson7d: 11 }, europe: { perPerson7d: 16 }, world: { perPerson7d: 25 } },
+  },
+  {
+    id: 'uniqa', name: 'Uniqa', packages: 'Ekskluziv / Komfort',
+    coverage: '15K–40K€ medical', tag: 'premium',
+    prices: { balkans: { perPerson7d: 13 }, europe: { perPerson7d: 18 }, world: { perPerson7d: 28 } },
+  },
+  {
+    id: 'generali', name: 'Generali', packages: 'Standard / Gold',
+    coverage: '15K–40K€ medical', tag: 'premium',
+    prices: { balkans: { perPerson7d: 14 }, europe: { perPerson7d: 20 }, world: { perPerson7d: 31 } },
+  },
+];
+
+export type ZoneKey = 'balkans' | 'europe' | 'world';
+
+export const zoneLabels: Record<ZoneKey, string> = {
+  balkans: 'Balkan',
+  europe: 'Evropa',
+  world: 'Svet',
+};
+
+export function getDestinationZone(region: MedicalDestination['region']): ZoneKey {
+  if (region === 'Balkan') return 'balkans';
+  if (region === 'Evropa') return 'europe';
+  return 'world';
+}
+
 export function getCostTierLabel(avg: number): { label: string; emoji: string; tier: 'low' | 'medium' | 'high' } {
   if (avg <= 56) return { label: 'Jeftini troškovi lečenja', emoji: '✅', tier: 'low' };
   if (avg <= 127) return { label: 'Prosečni troškovi lečenja', emoji: '⚠️', tier: 'medium' };
