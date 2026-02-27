@@ -27,7 +27,7 @@ export default function CostTable({ destination }: Props) {
           Troškovi lečenja u: {destination.name}
         </h2>
         <p className="text-sm text-muted-foreground mt-1">
-          Bez putnog osiguranja su cene koje plaćaš iz svog džepa.
+          Bez putnog osiguranja ovo su cene koje plaćaš iz svog džepa.
         </p>
       </div>
 
