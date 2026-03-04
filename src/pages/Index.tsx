@@ -70,6 +70,23 @@ const Index = () => {
           <InsurancePricing destination={destination} />
         </div>
 
+        {/* Email form */}
+        <div className="text-center space-y-3 py-2">
+          <p className="text-sm text-muted-foreground">
+            Cene su informativne. Tačnu cenu dobijate na stranici za poređenje.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+            <input
+              type="email"
+              placeholder="Tvoj email"
+              className="flex-1 h-10 rounded-md border border-input bg-background px-3 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            />
+            <button className="h-10 px-5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors whitespace-nowrap">
+              Pošalji mi ponude
+            </button>
+          </div>
+        </div>
+
         {/* CTA */}
         <div className="rounded-xl gradient-hero p-6 text-center space-y-4">
           <div className="flex flex-col items-center gap-2">
