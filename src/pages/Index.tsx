@@ -33,9 +33,28 @@ const Index = () => {
     averageCost: destination.avg,
     rank: destination.rank,
     worstCase,
-    incidents: destination.incidents,
-    insuranceOptions,
-    cheapestOption,
+
+    incident1: destination.incidents[0] || "",
+    incident2: destination.incidents[1] || "",
+    incident3: destination.incidents[2] || "",
+    incident4: destination.incidents[3] || "",
+    incident5: destination.incidents[4] || "",
+
+    cheapestProvider: cheapestOption?.provider || "",
+    cheapestPrice: cheapestOption?.price || "",
+    cheapestCoverage: cheapestOption?.coverage || "",
+    cheapestPackages: cheapestOption?.packages || "",
+
+    provider1: insuranceOptions[0]?.provider || "",
+    price1: insuranceOptions[0]?.price || "",
+    provider2: insuranceOptions[1]?.provider || "",
+    price2: insuranceOptions[1]?.price || "",
+    provider3: insuranceOptions[2]?.provider || "",
+    price3: insuranceOptions[2]?.price || "",
+    provider4: insuranceOptions[3]?.provider || "",
+    price4: insuranceOptions[3]?.price || "",
+    provider5: insuranceOptions[4]?.provider || "",
+    price5: insuranceOptions[4]?.price || "",
   };
 
   const handleEmailSubmit = () => {
