@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { medicalDestinations } from "@/data/medicalData";
+import { medicalDestinations, getWorstCaseTotal, insuranceCompanies, getDestinationZone } from "@/data/medicalData";
 import DestinationSelect from "@/components/medical/DestinationSelect";
 import CostTable from "@/components/medical/CostTable";
 import HealthIncidents from "@/components/medical/HealthIncidents";
 import DestinationRank from "@/components/medical/DestinationRank";
 import InsurancePricing from "@/components/medical/InsurancePricing";
-import { ExternalLink, ShieldCheck } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import policymarketLogo from "@/assets/policymarket-logo.svg";
 import miskoImg from "@/assets/misko.png";
 
@@ -14,7 +14,38 @@ const defaultDest = medicalDestinations.find((d) => d.id === "greece")!;
 const Index = () => {
   const [destination, setDestination] = useState(defaultDest);
   const [email, setEmail] = useState("");
+  const zone = getDestinationZone(destination.region);
+  const worstCase = getWorstCaseTotal(destination.costs);
 
+  const insuranceOptions = insuranceCompanies.map((ins) => ({
+    provider: ins.name,
+    price: ins.prices[zone].perPerson7d,
+    coverage: ins.coverage,
+    packages: ins.packages,
+    tag: ins.tag,
+  }));
+
+  const cheapestOption = [...insuranceOptions].sort((a, b) => a.price - b.price)[0];
+
+  const resultSnapshot = {
+    destination: destination.name,
+    region: destination.region,
+    averageCost: destination.avg,
+    rank: destination.rank,
+    worstCase,
+    incidents: destination.incidents,
+    insuranceOptions,
+    cheapestOption,
+  };
+
+  const handleEmailSubmit = () => {
+    const payload = {
+      email,
+      ...resultSnapshot,
+    };
+
+    console.log("Medical calculator payload:", payload);
+  };
   return (
     <div className="min-h-screen" style={{ background: "var(--gradient-subtle)" }}>
       {/* Header */}
@@ -82,7 +113,10 @@ const Index = () => {
               onChange={(e) => setEmail(e.target.value)}
               className="flex-1 h-10 rounded-md border border-input bg-background px-3 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             />
-            <button className="h-10 px-5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors whitespace-nowrap">
+            <button
+              onClick={handleEmailSubmit}
+              className="h-10 px-5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors whitespace-nowrap"
+            >
               Pošalji mi detaljan pregled troškova
             </button>
           </div>
