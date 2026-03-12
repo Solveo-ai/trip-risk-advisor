@@ -57,13 +57,41 @@ const Index = () => {
     price5: insuranceOptions[4]?.price || "",
   };
 
-  const handleEmailSubmit = () => {
-    const payload = {
-      email,
-      ...resultSnapshot,
-    };
+  const [submitting, setSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
-    console.log("Medical calculator payload:", payload);
+  const handleEmailSubmit = async () => {
+    if (!email || submitting) return;
+    setSubmitting(true);
+    setSubmitStatus("idle");
+
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-medical-cost-email`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({ email, ...resultSnapshot }),
+        }
+      );
+
+      if (!res.ok) {
+        const err = await res.json();
+        console.error("Submit error:", err);
+        setSubmitStatus("error");
+      } else {
+        setSubmitStatus("success");
+        setEmail("");
+      }
+    } catch (e) {
+      console.error("Submit error:", e);
+      setSubmitStatus("error");
+    } finally {
+      setSubmitting(false);
+    }
   };
   return (
     <div className="min-h-screen" style={{ background: "var(--gradient-subtle)" }}>
@@ -123,22 +151,29 @@ const Index = () => {
         </div>
 
         {/* Email form */}
-        <div className="text-center py-2">
+        <div className="text-center py-2 space-y-2">
           <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
             <input
               type="email"
               placeholder="Tvoj email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => { setEmail(e.target.value); setSubmitStatus("idle"); }}
               className="flex-1 h-10 rounded-md border border-input bg-background px-3 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             />
             <button
               onClick={handleEmailSubmit}
-              className="h-10 px-5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors whitespace-nowrap"
+              disabled={submitting || !email}
+              className="h-10 px-5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors whitespace-nowrap disabled:opacity-50"
             >
-              Pošalji mi detaljan pregled troškova
+              {submitting ? "Šaljem..." : "Pošalji mi detaljan pregled troškova"}
             </button>
           </div>
+          {submitStatus === "success" && (
+            <p className="text-sm text-green-600">✓ Pregled troškova je poslat na tvoj email!</p>
+          )}
+          {submitStatus === "error" && (
+            <p className="text-sm text-destructive">Došlo je do greške. Pokušaj ponovo.</p>
+          )}
         </div>
 
         {/* CTA */}

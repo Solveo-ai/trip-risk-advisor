@@ -1,1 +1,4 @@
 project_id = "jyatlrwofhhvddsalrta"
+
+[functions.send-medical-cost-email]
+verify_jwt = false
