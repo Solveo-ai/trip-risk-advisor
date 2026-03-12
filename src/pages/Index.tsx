@@ -57,13 +57,41 @@ const Index = () => {
     price5: insuranceOptions[4]?.price || "",
   };
 
-  const handleEmailSubmit = () => {
-    const payload = {
-      email,
-      ...resultSnapshot,
-    };
+  const [submitting, setSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
-    console.log("Medical calculator payload:", payload);
+  const handleEmailSubmit = async () => {
+    if (!email || submitting) return;
+    setSubmitting(true);
+    setSubmitStatus("idle");
+
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-medical-cost-email`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({ email, ...resultSnapshot }),
+        }
+      );
+
+      if (!res.ok) {
+        const err = await res.json();
+        console.error("Submit error:", err);
+        setSubmitStatus("error");
+      } else {
+        setSubmitStatus("success");
+        setEmail("");
+      }
+    } catch (e) {
+      console.error("Submit error:", e);
+      setSubmitStatus("error");
+    } finally {
+      setSubmitting(false);
+    }
   };
   return (
     <div className="min-h-screen" style={{ background: "var(--gradient-subtle)" }}>
