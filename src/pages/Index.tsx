@@ -13,6 +13,7 @@ const defaultDest = medicalDestinations.find((d) => d.id === "greece")!;
 
 const Index = () => {
   const [destination, setDestination] = useState(defaultDest);
+  const [email, setEmail] = useState("");
 
   return (
     <div className="min-h-screen" style={{ background: "var(--gradient-subtle)" }}>
