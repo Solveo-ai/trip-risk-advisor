@@ -66,17 +66,14 @@ const Index = () => {
     setSubmitStatus("idle");
 
     try {
-      const res = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-medical-cost-email`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-          },
-          body: JSON.stringify({ email, ...resultSnapshot }),
-        }
-      );
+      const res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-medical-cost-email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        },
+        body: JSON.stringify({ email, ...resultSnapshot }),
+      });
 
       if (!res.ok) {
         const err = await res.json();
@@ -100,7 +97,7 @@ const Index = () => {
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <img src={policymarketLogo} alt="PolicyMarket" className="h-7" />
           <a
-            href="https://mktg-stg.policymarket.shop/sr"
+            href="https://policymarket.shop/sr"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-primary font-medium hover:underline flex items-center gap-1"
@@ -157,7 +154,10 @@ const Index = () => {
               type="email"
               placeholder="Tvoj email"
               value={email}
-              onChange={(e) => { setEmail(e.target.value); setSubmitStatus("idle"); }}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setSubmitStatus("idle");
+              }}
               className="flex-1 h-10 rounded-md border border-input bg-background px-3 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             />
             <button
@@ -171,9 +171,7 @@ const Index = () => {
           {submitStatus === "success" && (
             <p className="text-sm text-green-600">✓ Pregled troškova je poslat na tvoj email!</p>
           )}
-          {submitStatus === "error" && (
-            <p className="text-sm text-destructive">Došlo je do greške. Pokušaj ponovo.</p>
-          )}
+          {submitStatus === "error" && <p className="text-sm text-destructive">Došlo je do greške. Pokušaj ponovo.</p>}
         </div>
 
         {/* CTA */}
