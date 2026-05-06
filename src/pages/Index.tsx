@@ -191,7 +191,7 @@ const Index = () => {
             Putno osiguranje pokriva sve ove troškove. Uporedi cene osiguravajućih kuća u Srbiji.
           </p>
           <a
-            href="https://mktg-stg.policymarket.shop/sr"
+            href="https://policymarket.shop/sr"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-card text-foreground font-semibold py-3 px-8 rounded-lg hover:bg-card/90 transition-colors text-sm shadow-accent"
