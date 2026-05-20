@@ -97,7 +97,7 @@ const Index = () => {
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <img src={policymarketLogo} alt="PolicyMarket" className="h-7" />
           <a
-            href="https://policymarket.shop/sr"
+            href="https://app.policymarket.shop/sr-RS"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-primary font-medium hover:underline flex items-center gap-1"
