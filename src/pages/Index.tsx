@@ -10,7 +10,6 @@ import { ExternalLink } from "lucide-react";
 import policymarketLogo from "@/assets/policymarket-logo.svg";
 import miskoImg from "@/assets/misko.png";
 import { openPreferences } from "@/lib/consent";
-import miskoImg from "@/assets/misko.png";
 
 const defaultDest = medicalDestinations.find((d) => d.id === "greece")!;
 
