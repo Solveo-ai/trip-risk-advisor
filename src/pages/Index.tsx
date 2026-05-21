@@ -109,7 +109,7 @@ const Index = () => {
             <img src={policymarketLogo} alt="PolicyMarket" className="h-7" />
           </a>
           <a
-            href={`https://app.policymarket.shop/sr-RS${window.location.search}`}
+            href={`https://app.policymarket.shop/sr-RS${forwardedParams}`}
             target="_blank"
             rel="noopener"
             className="text-sm text-primary font-medium hover:underline flex items-center gap-1"
@@ -203,7 +203,7 @@ const Index = () => {
             Putno osiguranje pokriva sve ove troškove. Uporedi cene osiguravajućih kuća u Srbiji.
           </p>
           <a
-            href={`https://app.policymarket.shop/sr-RS${window.location.search}`}
+            href={`https://app.policymarket.shop/sr-RS${forwardedParams}`}
             target="_blank"
             rel="noopener"
             className="inline-flex items-center gap-2 bg-card text-foreground font-semibold py-3 px-8 rounded-lg hover:bg-card/90 transition-colors text-sm shadow-accent"
