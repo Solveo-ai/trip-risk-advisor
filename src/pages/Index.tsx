@@ -95,7 +95,13 @@ const Index = () => {
       {/* Header */}
       <header className="bg-card border-b border-border py-4 px-4">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
-          <img src={policymarketLogo} alt="PolicyMarket" className="h-7" />
+          <a
+            href={`https://policymarket.shop/sr${window.location.search}`}
+            target="_blank"
+            rel="noopener"
+          >
+            <img src={policymarketLogo} alt="PolicyMarket" className="h-7" />
+          </a>
           <a
             href={`https://app.policymarket.shop/sr-RS${window.location.search}`}
             target="_blank"
