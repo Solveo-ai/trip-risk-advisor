@@ -245,7 +245,7 @@ const Index = () => {
             Cene su okvirne i odnose se na pacijente bez osiguranja. Stvarni troškovi mogu varirati u zavisnosti od
             bolnice i vrste tretmana.
           </p>
-          <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground pt-2">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground pt-2">
             <span>© 2026 PolicyMarket</span>
             <a
               href="https://policymarket.co"
@@ -255,6 +255,16 @@ const Index = () => {
             >
               policymarket.co <ExternalLink className="h-3 w-3" />
             </a>
+            <Link to="/cookie-policy" className="hover:text-foreground transition-colors">
+              Politika kolačića
+            </Link>
+            <button
+              type="button"
+              onClick={openPreferences}
+              className="hover:text-foreground transition-colors"
+            >
+              Podešavanja kolačića
+            </button>
           </div>
         </footer>
       </main>
