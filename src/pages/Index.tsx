@@ -11,11 +11,17 @@ import miskoImg from "@/assets/misko.png";
 
 const defaultDest = medicalDestinations.find((d) => d.id === "greece")!;
 
+const getForwardedParams = () => {
+  if (typeof window === "undefined") return "";
+  return (window.location.search || "") + (window.location.hash || "");
+};
+
 const Index = () => {
   const [destination, setDestination] = useState(defaultDest);
   const [email, setEmail] = useState("");
   const zone = getDestinationZone(destination.region);
   const worstCase = getWorstCaseTotal(destination.costs);
+  const forwardedParams = getForwardedParams();
 
   const insuranceOptions = insuranceCompanies.map((ins) => ({
     provider: ins.name,
