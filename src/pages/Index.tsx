@@ -102,7 +102,7 @@ const Index = () => {
       <header className="bg-card border-b border-border py-4 px-4">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <a
-            href={`https://policymarket.shop/sr${window.location.search}`}
+            href={`https://policymarket.shop/sr${forwardedParams}`}
             target="_blank"
             rel="noopener"
           >
