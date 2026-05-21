@@ -11,11 +11,17 @@ import miskoImg from "@/assets/misko.png";
 
 const defaultDest = medicalDestinations.find((d) => d.id === "greece")!;
 
+const getForwardedParams = () => {
+  if (typeof window === "undefined") return "";
+  return (window.location.search || "") + (window.location.hash || "");
+};
+
 const Index = () => {
   const [destination, setDestination] = useState(defaultDest);
   const [email, setEmail] = useState("");
   const zone = getDestinationZone(destination.region);
   const worstCase = getWorstCaseTotal(destination.costs);
+  const forwardedParams = getForwardedParams();
 
   const insuranceOptions = insuranceCompanies.map((ins) => ({
     provider: ins.name,
@@ -96,14 +102,14 @@ const Index = () => {
       <header className="bg-card border-b border-border py-4 px-4">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <a
-            href={`https://policymarket.shop/sr${window.location.search}`}
+            href={`https://policymarket.shop/sr${forwardedParams}`}
             target="_blank"
             rel="noopener"
           >
             <img src={policymarketLogo} alt="PolicyMarket" className="h-7" />
           </a>
           <a
-            href={`https://app.policymarket.shop/sr-RS${window.location.search}`}
+            href={`https://app.policymarket.shop/sr-RS${forwardedParams}`}
             target="_blank"
             rel="noopener"
             className="text-sm text-primary font-medium hover:underline flex items-center gap-1"
@@ -197,7 +203,7 @@ const Index = () => {
             Putno osiguranje pokriva sve ove troškove. Uporedi cene osiguravajućih kuća u Srbiji.
           </p>
           <a
-            href={`https://app.policymarket.shop/sr-RS${window.location.search}`}
+            href={`https://app.policymarket.shop/sr-RS${forwardedParams}`}
             target="_blank"
             rel="noopener"
             className="inline-flex items-center gap-2 bg-card text-foreground font-semibold py-3 px-8 rounded-lg hover:bg-card/90 transition-colors text-sm shadow-accent"
