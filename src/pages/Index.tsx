@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { medicalDestinations, getWorstCaseTotal, insuranceCompanies, getDestinationZone } from "@/data/medicalData";
 import DestinationSelect from "@/components/medical/DestinationSelect";
 import CostTable from "@/components/medical/CostTable";
@@ -7,6 +8,8 @@ import DestinationRank from "@/components/medical/DestinationRank";
 import InsurancePricing from "@/components/medical/InsurancePricing";
 import { ExternalLink } from "lucide-react";
 import policymarketLogo from "@/assets/policymarket-logo.svg";
+import miskoImg from "@/assets/misko.png";
+import { openPreferences } from "@/lib/consent";
 import miskoImg from "@/assets/misko.png";
 
 const defaultDest = medicalDestinations.find((d) => d.id === "greece")!;
