@@ -97,9 +97,9 @@ const Index = () => {
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <img src={policymarketLogo} alt="PolicyMarket" className="h-7" />
           <a
-            href="https://app.policymarket.shop/sr-RS"
+            href={`https://app.policymarket.shop/sr-RS${window.location.search}`}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener"
             className="text-sm text-primary font-medium hover:underline flex items-center gap-1"
           >
             Uporedi polise <ExternalLink className="h-3.5 w-3.5" />
@@ -191,9 +191,9 @@ const Index = () => {
             Putno osiguranje pokriva sve ove troškove. Uporedi cene osiguravajućih kuća u Srbiji.
           </p>
           <a
-            href="https://policymarket.shop/sr"
+            href={`https://app.policymarket.shop/sr-RS${window.location.search}`}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener"
             className="inline-flex items-center gap-2 bg-card text-foreground font-semibold py-3 px-8 rounded-lg hover:bg-card/90 transition-colors text-sm shadow-accent"
           >
             Uporedi polise osiguranja →
