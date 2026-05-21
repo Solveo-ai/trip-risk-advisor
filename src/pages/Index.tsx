@@ -13,7 +13,28 @@ const defaultDest = medicalDestinations.find((d) => d.id === "greece")!;
 
 const getForwardedParams = () => {
   if (typeof window === "undefined") return "";
-  return (window.location.search || "") + (window.location.hash || "");
+  // 1) Try own URL
+  let search = window.location.search || "";
+  let hash = window.location.hash || "";
+  // 2) If embedded in an iframe, try the parent (same-origin only)
+  if ((!search || search === "?") && window.parent && window.parent !== window) {
+    try {
+      search = window.parent.location.search || search;
+      hash = window.parent.location.hash || hash;
+    } catch {
+      // cross-origin parent, ignore
+    }
+  }
+  // 3) Fallback: pull query string from document.referrer
+  if (!search || search === "?") {
+    try {
+      const ref = document.referrer ? new URL(document.referrer) : null;
+      if (ref?.search) search = ref.search;
+    } catch {
+      // ignore
+    }
+  }
+  return search + hash;
 };
 
 const Index = () => {
