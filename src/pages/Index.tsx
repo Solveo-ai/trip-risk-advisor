@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { medicalDestinations, getWorstCaseTotal, insuranceCompanies, getDestinationZone } from "@/data/medicalData";
 import DestinationSelect from "@/components/medical/DestinationSelect";
 import CostTable from "@/components/medical/CostTable";
@@ -8,6 +9,7 @@ import InsurancePricing from "@/components/medical/InsurancePricing";
 import { ExternalLink } from "lucide-react";
 import policymarketLogo from "@/assets/policymarket-logo.svg";
 import miskoImg from "@/assets/misko.png";
+import { openPreferences } from "@/lib/consent";
 
 const defaultDest = medicalDestinations.find((d) => d.id === "greece")!;
 
@@ -243,7 +245,7 @@ const Index = () => {
             Cene su okvirne i odnose se na pacijente bez osiguranja. Stvarni troškovi mogu varirati u zavisnosti od
             bolnice i vrste tretmana.
           </p>
-          <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground pt-2">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground pt-2">
             <span>© 2026 PolicyMarket</span>
             <a
               href="https://policymarket.co"
@@ -253,6 +255,16 @@ const Index = () => {
             >
               policymarket.co <ExternalLink className="h-3 w-3" />
             </a>
+            <Link to="/cookie-policy" className="hover:text-foreground transition-colors">
+              Politika kolačića
+            </Link>
+            <button
+              type="button"
+              onClick={openPreferences}
+              className="hover:text-foreground transition-colors"
+            >
+              Podešavanja kolačića
+            </button>
           </div>
         </footer>
       </main>
