@@ -6,17 +6,11 @@ import {
   zoneLabels,
   getDestinationZone,
 } from '@/data/medicalData';
-import { Shield, ExternalLink } from 'lucide-react';
+import { Shield } from 'lucide-react';
 
 interface Props {
   destination: MedicalDestination;
 }
-
-const tagStyles: Record<string, { bg: string; text: string; label: string }> = {
-  cheapest: { bg: 'bg-success/10', text: 'text-success', label: 'najjeftinije' },
-  balanced: { bg: 'bg-warning/10', text: 'text-warning', label: 'balansiran' },
-  premium: { bg: 'bg-primary/10', text: 'text-primary', label: 'premium' },
-};
 
 export default function InsurancePricing({ destination }: Props) {
   const defaultZone = getDestinationZone(destination.region);
@@ -72,7 +66,6 @@ export default function InsurancePricing({ destination }: Props) {
         {insuranceCompanies.map((ins) => {
           const price = ins.prices[zone].perPerson7d;
           const perDay = (price / 7).toFixed(2);
-          const tag = tagStyles[ins.tag];
 
           return (
             <div
@@ -83,9 +76,6 @@ export default function InsurancePricing({ destination }: Props) {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="text-base font-semibold text-foreground">{ins.name}</span>
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${tag.bg} ${tag.text}`}>
-                    {tag.label}
-                  </span>
                 </div>
                 <div className="text-right">
                   <span className="text-xl font-bold text-foreground tabular-nums">€{price}</span>
