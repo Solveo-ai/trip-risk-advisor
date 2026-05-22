@@ -33,7 +33,18 @@ serve(async (req) => {
 
   try {
     const body = await req.json();
-    const { email, ...params } = body;
+    const { email } = body;
+
+    const params = {
+      destination: body.destination,
+      averageCost: body.averageCost,
+      worstCase: body.worstCase,
+      incident1: body.incident1,
+      incident2: body.incident2,
+      incident3: body.incident3,
+      incident4: body.incident4,
+      incident5: body.incident5,
+    };
 
     // Validate email
     if (!email || typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
