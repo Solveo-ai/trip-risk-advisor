@@ -62,6 +62,8 @@ serve(async (req) => {
       medicalCost7Value: body.medicalCost7Value,
       medicalCost8Label: body.medicalCost8Label,
       medicalCost8Value: body.medicalCost8Value,
+      highestMedicalCostLabel: body.highestMedicalCostLabel,
+      highestMedicalCostValue: body.highestMedicalCostValue,
     };
 
     // Validate email
