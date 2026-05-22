@@ -37,13 +37,31 @@ serve(async (req) => {
 
     const params = {
       destination: body.destination,
+      region: body.region,
       averageCost: body.averageCost,
+      rank: body.rank,
       worstCase: body.worstCase,
       incident1: body.incident1,
       incident2: body.incident2,
       incident3: body.incident3,
       incident4: body.incident4,
       incident5: body.incident5,
+      medicalCost1Label: body.medicalCost1Label,
+      medicalCost1Value: body.medicalCost1Value,
+      medicalCost2Label: body.medicalCost2Label,
+      medicalCost2Value: body.medicalCost2Value,
+      medicalCost3Label: body.medicalCost3Label,
+      medicalCost3Value: body.medicalCost3Value,
+      medicalCost4Label: body.medicalCost4Label,
+      medicalCost4Value: body.medicalCost4Value,
+      medicalCost5Label: body.medicalCost5Label,
+      medicalCost5Value: body.medicalCost5Value,
+      medicalCost6Label: body.medicalCost6Label,
+      medicalCost6Value: body.medicalCost6Value,
+      medicalCost7Label: body.medicalCost7Label,
+      medicalCost7Value: body.medicalCost7Value,
+      medicalCost8Label: body.medicalCost8Label,
+      medicalCost8Value: body.medicalCost8Value,
     };
 
     // Validate email
