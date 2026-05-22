@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { medicalDestinations, getWorstCaseTotal, insuranceCompanies, getDestinationZone } from "@/data/medicalData";
+import { medicalDestinations, getWorstCaseTotal, costLabels, formatCostRange } from "@/data/medicalData";
 import DestinationSelect from "@/components/medical/DestinationSelect";
 import CostTable from "@/components/medical/CostTable";
 import HealthIncidents from "@/components/medical/HealthIncidents";
@@ -42,19 +42,8 @@ const getForwardedParams = () => {
 const Index = () => {
   const [destination, setDestination] = useState(defaultDest);
   const [email, setEmail] = useState("");
-  const zone = getDestinationZone(destination.region);
   const worstCase = getWorstCaseTotal(destination.costs);
   const forwardedParams = getForwardedParams();
-
-  const insuranceOptions = insuranceCompanies.map((ins) => ({
-    provider: ins.name,
-    price: ins.prices[zone].perPerson7d,
-    coverage: ins.coverage,
-    packages: ins.packages,
-    tag: ins.tag,
-  }));
-
-  const cheapestOption = [...insuranceOptions].sort((a, b) => a.price - b.price)[0];
 
   const resultSnapshot = {
     destination: destination.name,
@@ -69,21 +58,22 @@ const Index = () => {
     incident4: destination.incidents[3] || "",
     incident5: destination.incidents[4] || "",
 
-    cheapestProvider: cheapestOption?.provider || "",
-    cheapestPrice: cheapestOption?.price || "",
-    cheapestCoverage: cheapestOption?.coverage || "",
-    cheapestPackages: cheapestOption?.packages || "",
-
-    provider1: insuranceOptions[0]?.provider || "",
-    price1: insuranceOptions[0]?.price || "",
-    provider2: insuranceOptions[1]?.provider || "",
-    price2: insuranceOptions[1]?.price || "",
-    provider3: insuranceOptions[2]?.provider || "",
-    price3: insuranceOptions[2]?.price || "",
-    provider4: insuranceOptions[3]?.provider || "",
-    price4: insuranceOptions[3]?.price || "",
-    provider5: insuranceOptions[4]?.provider || "",
-    price5: insuranceOptions[4]?.price || "",
+    medicalCost1Label: costLabels.gp_consultation,
+    medicalCost1Value: formatCostRange(destination.costs.gp_consultation),
+    medicalCost2Label: costLabels.er_visit,
+    medicalCost2Value: formatCostRange(destination.costs.er_visit),
+    medicalCost3Label: costLabels.hospital_per_day,
+    medicalCost3Value: formatCostRange(destination.costs.hospital_per_day),
+    medicalCost4Label: costLabels.ambulance,
+    medicalCost4Value: formatCostRange(destination.costs.ambulance),
+    medicalCost5Label: costLabels.xray_imaging,
+    medicalCost5Value: formatCostRange(destination.costs.xray_imaging),
+    medicalCost6Label: costLabels.prescription_meds,
+    medicalCost6Value: formatCostRange(destination.costs.prescription_meds),
+    medicalCost7Label: costLabels.specialist_visit,
+    medicalCost7Value: formatCostRange(destination.costs.specialist_visit),
+    medicalCost8Label: costLabels.dental_emergency,
+    medicalCost8Value: formatCostRange(destination.costs.dental_emergency),
   };
 
   const [submitting, setSubmitting] = useState(false);
