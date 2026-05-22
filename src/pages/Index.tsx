@@ -45,6 +45,19 @@ const Index = () => {
   const worstCase = getWorstCaseTotal(destination.costs);
   const forwardedParams = getForwardedParams();
 
+  // Calculate the highest medical cost row dynamically (same logic as CostTable)
+  const costEntries = Object.entries(destination.costs) as [keyof typeof costLabels, { min: number; max: number }][];
+  let highestMaxKey = costEntries[0][0];
+  let highestMax = 0;
+  for (const [key, range] of costEntries) {
+    if (range.max > highestMax) {
+      highestMax = range.max;
+      highestMaxKey = key;
+    }
+  }
+  const highestMedicalCostLabel = costLabels[highestMaxKey];
+  const highestMedicalCostValue = formatCostRange(destination.costs[highestMaxKey]);
+
   const resultSnapshot = {
     destination: destination.name,
     region: destination.region,
@@ -74,6 +87,9 @@ const Index = () => {
     medicalCost7Value: formatCostRange(destination.costs.specialist_visit),
     medicalCost8Label: costLabels.dental_emergency,
     medicalCost8Value: formatCostRange(destination.costs.dental_emergency),
+
+    highestMedicalCostLabel,
+    highestMedicalCostValue,
   };
 
   const [submitting, setSubmitting] = useState(false);
