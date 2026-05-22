@@ -55,6 +55,8 @@ export function setConsent(prefs: ConsentPrefs) {
   };
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
+    const simpleFlag = prefs.analytics || prefs.marketing ? "accepted" : "rejected";
+    localStorage.setItem("cookie_consent", simpleFlag);
   } catch {
     /* ignore */
   }
