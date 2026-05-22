@@ -6,17 +6,11 @@ import {
   zoneLabels,
   getDestinationZone,
 } from '@/data/medicalData';
-import { Shield, ExternalLink } from 'lucide-react';
+import { Shield } from 'lucide-react';
 
 interface Props {
   destination: MedicalDestination;
 }
-
-const tagStyles: Record<string, { bg: string; text: string; label: string }> = {
-  cheapest: { bg: 'bg-success/10', text: 'text-success', label: 'najjeftinije' },
-  balanced: { bg: 'bg-warning/10', text: 'text-warning', label: 'balansiran' },
-  premium: { bg: 'bg-primary/10', text: 'text-primary', label: 'premium' },
-};
 
 export default function InsurancePricing({ destination }: Props) {
   const defaultZone = getDestinationZone(destination.region);
