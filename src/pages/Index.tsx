@@ -42,7 +42,27 @@ const getForwardedParams = () => {
 const Index = () => {
   const [destination, setDestination] = useState(defaultDest);
   const [email, setEmail] = useState("");
+  const [showResults, setShowResults] = useState(false);
+  const [validationError, setValidationError] = useState("");
   const worstCase = getWorstCaseTotal(destination.costs);
+
+  const handleSelectDestination = (d: typeof destination) => {
+    setDestination(d);
+    setShowResults(false);
+    setValidationError("");
+  };
+
+  const handleShowResults = () => {
+    if (!destination) {
+      setValidationError("Prvo izaberi destinaciju.");
+      return;
+    }
+    setValidationError("");
+    setShowResults(true);
+    setTimeout(() => {
+      document.getElementById("results-start")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 80);
+  };
   const forwardedParams = getForwardedParams();
 
   // Calculate the highest medical cost row dynamically (same logic as CostTable)
@@ -163,83 +183,97 @@ const Index = () => {
 
       {/* Destination picker */}
       <main className="max-w-3xl mx-auto px-4 pb-12 space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-          <label className="text-sm font-medium text-foreground whitespace-nowrap">Gde putuješ?</label>
-          <DestinationSelect selected={destination} onSelect={setDestination} />
-        </div>
-
-        {/* Section 1: Cost Table */}
-        <div className="animate-fade-in-up">
-          <CostTable destination={destination} />
-        </div>
-
-        {/* Section 2: Health Incidents */}
-        <div className="animate-fade-in-up" style={{ animationDelay: "0.05s" }}>
-          <HealthIncidents destination={destination} />
-        </div>
-
-        {/* Section 3: Destination Rank */}
-        <div className="animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-          <DestinationRank destination={destination} />
-        </div>
-
-        {/* Section 4: Insurance Pricing */}
-        <div className="animate-fade-in-up" style={{ animationDelay: "0.15s" }}>
-          <InsurancePricing destination={destination} />
-        </div>
-
-        {/* Email form */}
-        <div className="text-center py-2 space-y-2">
-          <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Tvoj email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                setSubmitStatus("idle");
-              }}
-              className="flex-1 h-10 rounded-md border border-input bg-background px-3 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            />
+        <div className="rounded-xl border border-border bg-card p-4 space-y-3 shadow-sm">
+          <label className="block text-sm font-medium text-foreground">Gde putuješ?</label>
+          <div className="flex flex-col sm:flex-row gap-2">
+            <div className="flex-1 min-w-0">
+              <DestinationSelect selected={destination} onSelect={handleSelectDestination} />
+            </div>
             <button
-              onClick={handleEmailSubmit}
-              disabled={submitting || !email}
-              className="h-10 px-5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors whitespace-nowrap disabled:opacity-50"
+              onClick={handleShowResults}
+              className="h-10 px-5 rounded-md bg-[hsl(142,71%,45%)] text-white text-sm font-semibold hover:bg-[hsl(142,71%,40%)] transition-colors whitespace-nowrap w-full sm:w-auto"
             >
-              {submitting ? "Šaljem..." : "Pošalji mi detaljan pregled troškova"}
+              Prikaži troškove
             </button>
           </div>
-          {submitStatus === "success" && (
-            <p className="text-sm text-green-600">✓ Pregled troškova je poslat na tvoj email!</p>
+          {validationError && (
+            <p className="text-sm text-destructive">{validationError}</p>
           )}
-          {submitStatus === "error" && <p className="text-sm text-destructive">Došlo je do greške. Pokušaj ponovo.</p>}
         </div>
 
-        {/* CTA */}
-        <div className="rounded-xl gradient-hero p-6 text-center space-y-4">
-          <div className="flex flex-col items-center gap-2">
-            <img
-              src={miskoImg}
-              alt="Miško"
-              className="h-24 w-24 rounded-full object-cover border-2 border-primary-foreground/30 shadow-lg"
-            />
-            <p className="text-sm font-medium text-primary-foreground/90 italic">Koji je Miškov savet za tebe?</p>
-          </div>
-          <h2 className="text-xl font-bold font-heading text-primary-foreground">
-            Ne daj Bože, ali ako se nešto desi, neka te to košta manje od €2 dnevno, a ne €800.
-          </h2>
-          <p className="text-sm text-primary-foreground/80 max-w-md mx-auto">
-            Putno osiguranje pokriva sve ove troškove. Uporedi cene osiguravajućih kuća u Srbiji.
-          </p>
-          <a
-            href={`https://app.policymarket.shop/sr-RS${forwardedParams}`}
-            target="_blank"
-            rel="noopener"
-            className="inline-flex items-center gap-2 bg-card text-foreground font-semibold py-3 px-8 rounded-lg hover:bg-card/90 transition-colors text-sm shadow-accent"
-          >
-            Uporedi polise osiguranja →
-          </a>
-        </div>
+        {showResults && (
+          <>
+            <div id="results-start" className="animate-fade-in-up">
+              <CostTable destination={destination} />
+            </div>
+
+            <div className="animate-fade-in-up" style={{ animationDelay: "0.05s" }}>
+              <HealthIncidents destination={destination} />
+            </div>
+
+            <div className="animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+              <DestinationRank destination={destination} />
+            </div>
+
+            <div className="animate-fade-in-up" style={{ animationDelay: "0.15s" }}>
+              <InsurancePricing destination={destination} />
+            </div>
+
+            {/* Email form */}
+            <div className="text-center py-2 space-y-2">
+              <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+                <input
+                  type="email"
+                  placeholder="Tvoj email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setSubmitStatus("idle");
+                  }}
+                  className="flex-1 h-10 rounded-md border border-input bg-background px-3 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                />
+                <button
+                  onClick={handleEmailSubmit}
+                  disabled={submitting || !email}
+                  className="h-10 px-5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors whitespace-nowrap disabled:opacity-50"
+                >
+                  {submitting ? "Šaljem..." : "Pošalji mi detaljan pregled troškova"}
+                </button>
+              </div>
+              {submitStatus === "success" && (
+                <p className="text-sm text-green-600">✓ Pregled troškova je poslat na tvoj email!</p>
+              )}
+              {submitStatus === "error" && <p className="text-sm text-destructive">Došlo je do greške. Pokušaj ponovo.</p>}
+            </div>
+
+            {/* CTA */}
+            <div className="rounded-xl gradient-hero p-6 text-center space-y-4">
+              <div className="flex flex-col items-center gap-2">
+                <img
+                  src={miskoImg}
+                  alt="Miško"
+                  className="h-24 w-24 rounded-full object-cover border-2 border-primary-foreground/30 shadow-lg"
+                />
+                <p className="text-sm font-medium text-primary-foreground/90 italic">Koji je Miškov savet za tebe?</p>
+              </div>
+              <h2 className="text-xl font-bold font-heading text-primary-foreground">
+                Ne daj Bože, ali ako se nešto desi, neka te to košta manje od €2 dnevno, a ne €800.
+              </h2>
+              <p className="text-sm text-primary-foreground/80 max-w-md mx-auto">
+                Putno osiguranje pokriva sve ove troškove. Uporedi cene osiguravajućih kuća u Srbiji.
+              </p>
+              <a
+                href={`https://app.policymarket.shop/sr-RS${forwardedParams}`}
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center gap-2 bg-card text-foreground font-semibold py-3 px-8 rounded-lg hover:bg-card/90 transition-colors text-sm shadow-accent"
+              >
+                Uporedi polise osiguranja →
+              </a>
+            </div>
+          </>
+        )}
+
 
         {/* Footer */}
         <footer className="pt-6 pb-10 border-t border-border space-y-3">
