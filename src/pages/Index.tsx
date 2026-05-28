@@ -42,7 +42,27 @@ const getForwardedParams = () => {
 const Index = () => {
   const [destination, setDestination] = useState(defaultDest);
   const [email, setEmail] = useState("");
+  const [showResults, setShowResults] = useState(false);
+  const [validationError, setValidationError] = useState("");
   const worstCase = getWorstCaseTotal(destination.costs);
+
+  const handleSelectDestination = (d: typeof destination) => {
+    setDestination(d);
+    setShowResults(false);
+    setValidationError("");
+  };
+
+  const handleShowResults = () => {
+    if (!destination) {
+      setValidationError("Prvo izaberi destinaciju.");
+      return;
+    }
+    setValidationError("");
+    setShowResults(true);
+    setTimeout(() => {
+      document.getElementById("results-start")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 80);
+  };
   const forwardedParams = getForwardedParams();
 
   // Calculate the highest medical cost row dynamically (same logic as CostTable)
