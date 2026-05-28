@@ -191,7 +191,7 @@ const Index = () => {
             </div>
             <button
               onClick={handleShowResults}
-              className="h-10 px-5 rounded-md bg-[hsl(142,71%,45%)] text-white text-sm font-semibold hover:bg-[hsl(142,71%,40%)] transition-colors whitespace-nowrap w-full sm:w-auto"
+              className="h-10 px-5 rounded-md bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors whitespace-nowrap w-full sm:w-auto"
             >
               Prikaži troškove
             </button>
