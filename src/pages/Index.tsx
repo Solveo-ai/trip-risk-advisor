@@ -237,7 +237,7 @@ const Index = () => {
                   disabled={submitting || !email}
                   className="h-10 px-5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors whitespace-nowrap disabled:opacity-50"
                 >
-                  {submitting ? "Šaljem..." : "Pošalji mi detaljan pregled troškova"}
+                  {submitting ? "Šaljem..." : "Pošalji mi pregled na e-mail"}
                 </button>
               </div>
               {submitStatus === "success" && (
