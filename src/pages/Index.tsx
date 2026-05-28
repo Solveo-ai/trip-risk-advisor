@@ -172,7 +172,7 @@ const Index = () => {
       <section className="py-10 px-4 text-center">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-3xl sm:text-4xl font-bold font-heading text-foreground mb-3">
-            Ne daj Bože da ti se nešto desi na putu. Bez osiguranja.
+            Ne daj Bože da ti se nešto desi na putu bez putnog osiguranja
           </h1>
           <p className="text-base text-muted-foreground max-w-xl mx-auto">
             Pogledaj stvarne cene lečenja u 20 najpopularnijih destinacija iz Srbije — i koliko bi te to koštalo iz svog
